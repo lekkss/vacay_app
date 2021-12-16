@@ -41,7 +41,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AppLargeTest(
+                        AppLargeText(
                           text: "Trips",
                         ),
                         AppText(
