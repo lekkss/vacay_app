@@ -9,6 +9,7 @@ class ResponsiveButton extends StatelessWidget {
     Key? key,
     this.isResponsive = false,
     this.width = 120,
+    void Function()? onPressed,
   }) : super(key: key);
 
   @override

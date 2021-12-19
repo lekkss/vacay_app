@@ -6,6 +6,7 @@ import 'package:flutter_cubit/widget/app_text.dart';
 import 'package:flutter_cubit/widget/responsive_button.dart';
 
 class DetailPage extends StatefulWidget {
+  static const routName = '/detailsPage';
   const DetailPage({Key? key}) : super(key: key);
 
   @override

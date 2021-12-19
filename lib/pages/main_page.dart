@@ -5,6 +5,7 @@ import 'package:flutter_cubit/pages/navpages/profile_page.dart';
 import 'package:flutter_cubit/pages/navpages/search_page.dart';
 
 class MainPage extends StatefulWidget {
+  static const routName = '/mainPage';
   const MainPage({Key? key}) : super(key: key);
 
   @override

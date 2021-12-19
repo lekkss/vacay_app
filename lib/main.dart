@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cubit/models/onboard_model.dart';
 import 'package:flutter_cubit/pages/detail_page.dart';
 import 'package:flutter_cubit/pages/main_page.dart';
 import 'package:flutter_cubit/pages/welcome_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,13 +15,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider(
+      create: (ctx) => OnboardItemsModel(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const WelcomePage(),
+          '/mainPage': (context) => const MainPage(),
+          '/detailsPage': (context) => const DetailPage(),
+        },
       ),
-      home: const DetailPage(),
     );
   }
 }

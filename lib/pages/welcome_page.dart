@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/misc/colors.dart';
+import 'package:flutter_cubit/models/onboard_model.dart';
 import 'package:flutter_cubit/widget/app_large_text.dart';
 import 'package:flutter_cubit/widget/app_text.dart';
 import 'package:flutter_cubit/widget/responsive_button.dart';
+import 'package:provider/provider.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -12,24 +14,20 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  List images = [
-    "welcome-one.png",
-    "welcome-two.png",
-    "welcome-three.png",
-  ];
   @override
   Widget build(BuildContext context) {
+    final onboardData = Provider.of<OnboardItemsModel>(context, listen: false);
     return Scaffold(
       body: PageView.builder(
           scrollDirection: Axis.vertical,
-          itemCount: images.length,
+          itemCount: onboardData.items.length,
           itemBuilder: (_, index) {
             return Container(
               width: double.maxFinite,
               height: double.maxFinite,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("img/" + images[index]),
+                  image: AssetImage(onboardData.items[index].imgUrl),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -42,25 +40,27 @@ class _WelcomePageState extends State<WelcomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppLargeText(
-                          text: "Trips",
+                          text: onboardData.items[index].headings,
                         ),
                         AppText(
-                          text: "Mountain",
+                          text: onboardData.items[index].title,
                           size: 30,
                         ),
                         const SizedBox(height: 20),
                         SizedBox(
                           width: 250,
                           child: AppText(
-                            text:
-                                "Mountain hikes give you an incredible sense of freedom along with endurance tests.",
+                            text: onboardData.items[index].description,
                             color: AppColors.textColor2,
                           ),
                         ),
                         const SizedBox(height: 40),
                         ResponsiveButton(
-                          width: 120,
-                        ),
+                            width: 120,
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                  context, '/mainPage');
+                            }),
                       ],
                     ),
                     Column(

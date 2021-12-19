@@ -20,31 +20,29 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: TabBar(
-              controller: _tabController,
-              labelPadding: const EdgeInsets.only(left: 20, right: 20),
-              labelColor: Colors.black,
-              unselectedLabelColor: Colors.grey,
-              isScrollable: true,
-              indicator: CircleTabIndicator(
-                color: AppColors.mainColor,
-                radius: 4,
-              ),
-              tabs: const [
-                Tab(
-                  text: "Places",
-                ),
-                Tab(
-                  text: "Inspiration",
-                ),
-                Tab(
-                  text: "Emotion",
-                ),
-              ],
+        Align(
+          alignment: Alignment.centerLeft,
+          child: TabBar(
+            controller: _tabController,
+            labelPadding: const EdgeInsets.only(left: 20, right: 20),
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.grey,
+            isScrollable: true,
+            indicator: CircleTabIndicator(
+              color: AppColors.mainColor,
+              radius: 4,
             ),
+            tabs: const [
+              Tab(
+                text: "Places",
+              ),
+              Tab(
+                text: "Inspiration",
+              ),
+              Tab(
+                text: "Emotion",
+              ),
+            ],
           ),
         ),
         Container(
@@ -59,18 +57,23 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
                   scrollDirection: Axis.horizontal,
                   itemCount: 3,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      margin: const EdgeInsets.only(
-                        right: 15,
-                        top: 20,
-                      ),
-                      height: 300,
-                      width: 200,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: const DecorationImage(
-                          image: AssetImage("img/mountain.jpeg"),
-                          fit: BoxFit.cover,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/detailsPage');
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                          right: 15,
+                          top: 20,
+                        ),
+                        height: 300,
+                        width: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: const DecorationImage(
+                            image: AssetImage("img/mountain.jpeg"),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     );
