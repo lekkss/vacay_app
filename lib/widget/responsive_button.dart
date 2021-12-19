@@ -3,10 +3,10 @@ import 'package:flutter_cubit/misc/colors.dart';
 import 'package:flutter_cubit/widget/app_text.dart';
 
 class ResponsiveButton extends StatelessWidget {
-  bool? isResponsive;
-  double? width;
+  final bool? isResponsive;
+  final double? width;
   final void Function()? onPressed;
-  ResponsiveButton({
+  const ResponsiveButton({
     Key? key,
     this.isResponsive = false,
     this.width = 120,
@@ -15,9 +15,9 @@ class ResponsiveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Flexible(
+    return Flexible(
+      child: GestureDetector(
+        onTap: onPressed,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -35,7 +35,7 @@ class ResponsiveButton extends StatelessWidget {
                       margin: const EdgeInsets.only(
                         left: 20,
                       ),
-                      child: AppText(
+                      child: const AppText(
                         text: "Book Trip Now",
                         color: Colors.white,
                       ),

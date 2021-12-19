@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/misc/colors.dart';
+import 'package:flutter_cubit/models/destination_model.dart';
+import 'package:flutter_cubit/pages/detail_page.dart';
+import 'package:provider/provider.dart';
 
 class TabView extends StatefulWidget {
   const TabView({Key? key}) : super(key: key);
@@ -18,6 +21,8 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final destinationData =
+        Provider.of<DestinationModal>(context, listen: false);
     return Column(
       children: [
         Align(
@@ -28,7 +33,7 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
             labelColor: Colors.black,
             unselectedLabelColor: Colors.grey,
             isScrollable: true,
-            indicator: CircleTabIndicator(
+            indicator: const CircleTabIndicator(
               color: AppColors.mainColor,
               radius: 4,
             ),
@@ -59,7 +64,10 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/detailsPage');
+                        Navigator.of(context).pushNamed(
+                          DetailPage.routName,
+                          arguments: destinationData.items[index].id,
+                        );
                       },
                       child: Container(
                         margin: const EdgeInsets.only(
@@ -70,8 +78,9 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
                         width: 200,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          image: const DecorationImage(
-                            image: AssetImage("img/mountain.jpeg"),
+                          image: DecorationImage(
+                            image:
+                                AssetImage(destinationData.items[index].image),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -90,8 +99,8 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
 
 class CircleTabIndicator extends Decoration {
   final Color color;
-  double radius;
-  CircleTabIndicator({required this.color, required this.radius});
+  final double radius;
+  const CircleTabIndicator({required this.color, required this.radius});
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
     //implement createBoxPainter

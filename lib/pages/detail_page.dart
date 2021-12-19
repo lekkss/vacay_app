@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/misc/colors.dart';
+import 'package:flutter_cubit/models/destination_model.dart';
 import 'package:flutter_cubit/widget/app_buttons.dart';
 import 'package:flutter_cubit/widget/app_large_text.dart';
 import 'package:flutter_cubit/widget/app_text.dart';
 import 'package:flutter_cubit/widget/responsive_button.dart';
+import 'package:provider/provider.dart';
 
 class DetailPage extends StatefulWidget {
   static const routName = '/detailsPage';
@@ -18,6 +20,10 @@ class _DetailPageState extends State<DetailPage> {
   int selectedIndex = 1;
   @override
   Widget build(BuildContext context) {
+    final destinationId = ModalRoute.of(context)!.settings.arguments as String;
+    final loadedDestination =
+        Provider.of<DestinationModal>(context, listen: false)
+            .findbyId(destinationId);
     return Scaffold(
       body: SizedBox(
         width: double.maxFinite,
@@ -30,9 +36,9 @@ class _DetailPageState extends State<DetailPage> {
               child: Container(
                 width: double.maxFinite,
                 height: 350,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("img/mountain.jpeg"),
+                    image: AssetImage(loadedDestination.image),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -81,11 +87,11 @@ class _DetailPageState extends State<DetailPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         AppLargeText(
-                          text: "Yosemite",
+                          text: loadedDestination.image,
                           color: Colors.black.withOpacity(0.8),
                         ),
                         AppLargeText(
-                          text: "\$250",
+                          text: "\$" + loadedDestination.amount.toString(),
                           color: AppColors.mainColor,
                         ),
                       ],
@@ -103,7 +109,7 @@ class _DetailPageState extends State<DetailPage> {
                           width: 5,
                         ),
                         AppText(
-                          text: "USA, Calofornia",
+                          text: loadedDestination.location,
                           color: AppColors.textColor1,
                         ),
                       ],
@@ -124,7 +130,7 @@ class _DetailPageState extends State<DetailPage> {
                         const SizedBox(
                           width: 5,
                         ),
-                        AppText(
+                        const AppText(
                           text: "(4.0)",
                           color: AppColors.textColor2,
                         )
@@ -141,7 +147,7 @@ class _DetailPageState extends State<DetailPage> {
                     const SizedBox(
                       height: 5,
                     ),
-                    AppText(
+                    const AppText(
                       text: "Number of people in your group",
                       color: AppColors.mainTextColor,
                     ),
@@ -188,7 +194,7 @@ class _DetailPageState extends State<DetailPage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    AppText(
+                    const AppText(
                       text:
                           "Yoesemite National Park is located in central Sierra Nevada in the US State of Califonia. it is located near the wild protected area",
                       color: AppColors.mainTextColor,
@@ -202,7 +208,7 @@ class _DetailPageState extends State<DetailPage> {
               left: 20,
               right: 20,
               child: Row(
-                children: [
+                children: const [
                   AppButtons(
                     color: AppColors.textColor2,
                     size: 60,
@@ -211,7 +217,7 @@ class _DetailPageState extends State<DetailPage> {
                     isIcon: true,
                     icon: Icons.favorite_border,
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 20,
                   ),
                   ResponsiveButton(

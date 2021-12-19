@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cubit/models/destination_model.dart';
 import 'package:flutter_cubit/models/onboard_model.dart';
 import 'package:flutter_cubit/pages/detail_page.dart';
 import 'package:flutter_cubit/pages/main_page.dart';
@@ -15,8 +16,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => OnboardItemsModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => OnboardItemsModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => DestinationModal(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,

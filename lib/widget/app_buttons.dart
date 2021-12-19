@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cubit/widget/app_text.dart';
 
 class AppButtons extends StatelessWidget {
-  bool? isIcon;
-  String? text;
-  IconData? icon;
+  final bool? isIcon;
+  final String? text;
+  final IconData? icon;
   final Color color;
   final Color backgroundColor;
-  double size;
+  final double size;
   final Color borderColor;
-  AppButtons(
+  const AppButtons(
       {Key? key,
       this.isIcon = false,
       this.text = "hi",

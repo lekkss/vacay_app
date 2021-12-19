@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.only(
               left: 20,
             ),
-            child: AppLargeText(text: "Discover"),
+            child: const AppLargeText(text: "Discover"),
           ),
           const SizedBox(
             height: 20,
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 AppLargeText(
                   text: "Explore more",
                   size: 22,
