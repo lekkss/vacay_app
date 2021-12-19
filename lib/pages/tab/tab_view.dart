@@ -21,8 +21,10 @@ class _TabViewState extends State<TabView> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final destinationData =
-        Provider.of<DestinationModal>(context, listen: false);
+    final destinationData = Provider.of<DestinationModal>(
+      context,
+      listen: false,
+    );
     return Column(
       children: [
         Align(

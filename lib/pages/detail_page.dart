@@ -45,7 +45,7 @@ class _DetailPageState extends State<DetailPage> {
               ),
             ),
             Positioned(
-              top: 70,
+              top: 30,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -87,7 +87,7 @@ class _DetailPageState extends State<DetailPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         AppLargeText(
-                          text: loadedDestination.image,
+                          text: loadedDestination.name,
                           color: Colors.black.withOpacity(0.8),
                         ),
                         AppLargeText(
