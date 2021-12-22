@@ -13,12 +13,16 @@ class WelcomePage extends StatefulWidget {
   _WelcomePageState createState() => _WelcomePageState();
 }
 
+final _controller = PageController();
+int _currentPage = 0;
+
 class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     final onboardData = Provider.of<OnboardItemsModel>(context, listen: false);
     return Scaffold(
       body: PageView.builder(
+          controller: _controller,
           scrollDirection: Axis.vertical,
           itemCount: onboardData.items.length,
           itemBuilder: (_, index) {
@@ -58,8 +62,14 @@ class _WelcomePageState extends State<WelcomePage> {
                         ResponsiveButton(
                             width: 120,
                             onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, '/mainPage');
+                              _currentPage + 1 == onboardData.items.length
+                                  ? Navigator.pushReplacementNamed(
+                                      context, '/mainPage')
+                                  : _controller.nextPage(
+                                      duration:
+                                          const Duration(microseconds: 200),
+                                      curve: Curves.easeIn,
+                                    );
                             }),
                       ],
                     ),
@@ -81,6 +91,13 @@ class _WelcomePageState extends State<WelcomePage> {
                   ],
                 ),
               ),
+            );
+          },
+          onPageChanged: (value) {
+            setState(
+              () {
+                _currentPage = value;
+              },
             );
           }),
     );
